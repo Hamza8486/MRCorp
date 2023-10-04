@@ -1,5 +1,3 @@
-# mr_bet
-
 Privacy Policy
 1. Information Collection and Usage
 MR App collects certain information to provide and improve our services. This information may include personal and non-personal data, such as:

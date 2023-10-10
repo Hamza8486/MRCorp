@@ -83,5 +83,8 @@ class VendorController extends GetxController {
     update();
   }
 
+
+
+
 }
 

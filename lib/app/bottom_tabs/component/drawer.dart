@@ -8,6 +8,7 @@ import 'package:mr_bet/app/bottom_tabs/dashboard/component/transaction.dart';
 import 'package:mr_bet/app/bottom_tabs/profile/component/claim_view.dart';
 import 'package:mr_bet/app/bottom_tabs/profile/component/earn_refrence.dart';
 import 'package:mr_bet/app/bottom_tabs/profile/component/faq_view.dart';
+import 'package:mr_bet/app/bottom_tabs/profile/component/help.dart';
 import 'package:mr_bet/app/bottom_tabs/profile/component/store_list.dart';
 import 'package:mr_bet/app/bottom_tabs/profile/component/tap_pay.dart';
 import 'package:mr_bet/app/bottom_tabs/profile/component/testmonials.dart';
@@ -407,7 +408,9 @@ class CustomDrawer extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-
+                    Get.to(HelpCenter(),
+                        transition: Transition.rightToLeft
+                    );
                   },
                   child: Container(
                     child: Row(

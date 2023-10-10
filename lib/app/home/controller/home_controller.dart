@@ -204,6 +204,7 @@ class HomeController extends GetxController {
     HelperFunctions.getFromPreference("token").then((value) {
       token.value = value;
       print(token.toString());
+      getAllBetData();
       getProfileData();
       getTransData();
       getWalletData();
@@ -569,6 +570,43 @@ class HomeController extends GetxController {
       debugPrint(e.toString());
     } finally {
       storeLoading(false);
+      update();
+    }
+    update();
+  }
+
+
+  var groceryId="".obs;
+  updateGroceryId(val){
+    groceryId.value=val;
+    update();
+  }
+
+
+  getAllBetData() async {
+    try {
+
+
+      update();
+
+      var profData = await ApiManger.getBetApi();
+      if (profData != null) {
+        updateGroceryId("3");
+        print("This is bet Id${profData.data?[1].id.toString()}");
+
+
+
+      } else {
+
+        update();
+      }
+    } catch (e) {
+
+
+      update();
+      debugPrint(e.toString());
+    } finally {
+
       update();
     }
     update();

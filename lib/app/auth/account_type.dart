@@ -72,6 +72,7 @@ class _AccountTypeState extends State<AccountType> {
                                   onTap: () {
                                     setState(() {
                                       type="user";
+                                      Get.put(AuthController()).updateNameProv("");
                                     });
 
                                   },
@@ -106,6 +107,7 @@ class _AccountTypeState extends State<AccountType> {
                                 GestureDetector(
                                     onTap: () {
                                       setState(() {
+                                        Get.put(AuthController()).updateNameProv("");
                                         type="admin";
                                       });
                                     },

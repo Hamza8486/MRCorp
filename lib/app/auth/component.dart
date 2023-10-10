@@ -34,6 +34,7 @@ Widget betField({String? Function(String?)? validator,TextEditingController?cont
   bool isSuffix= true,
   bool isRead=false,
   bool isCur=true,
+  int?max,
   Widget?child,
 final VoidCallback? onTap,
   Function(String?)? onChange
@@ -59,6 +60,7 @@ final VoidCallback? onTap,
     borderColor: AppColor.borderColorField,
     hint: hint??"",
     hintColor: AppColor.greyColors,
+
     textInputType:
     textInputType??
     TextInputType.emailAddress,
@@ -70,7 +72,7 @@ final VoidCallback? onTap,
     controller: controller,
     fontFamily: AppFont.regular,
     borderColor2: AppColor.primaryColor,
-    maxLines: 1,
+    maxLines: max??1,
   );
 }
 Widget dropDownAppAdd({hint,onChange,items,value,width,Color?color,double ? height}){

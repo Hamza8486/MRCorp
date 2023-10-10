@@ -10,18 +10,34 @@ class ScanQrPage extends StatefulWidget {
 
 class _ScanQrPageState extends State<ScanQrPage> {
   Barcode? result;
+  var qrData = TextEditingController();
   QRViewController? controller;
-
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
   void _onQRViewCreated(QRViewController controller) {
     setState(() => this.controller = controller);
     controller.scannedDataStream.listen((scanData) {
-      setState(() => result = scanData);
+      setState(() {
+        result = scanData;
+        if (result != null) {
+          controller!.pauseCamera();
+          qrData.text = result!.code.toString();
+          showDialog(
+            context: context,
+            builder: (context) {
+              return ScanResultDialog(
+                qrData: qrData.text,
+                onClose: () {
+                  controller!.resumeCamera();
+                },
+              );
+            },
+          );
+        }
+      });
     });
   }
-  // In order to get hot reload to work we need to pause the camera if the platform
-  // is android, or resume the camera if the platform is iOS.
+
   @override
   void reassemble() {
     super.reassemble();
@@ -32,35 +48,23 @@ class _ScanQrPageState extends State<ScanQrPage> {
     }
   }
 
-  void readQr() async {
-    if (result != null) {
-      controller!.pauseCamera();
-      setState(() {
-
-      });
-      print(result!.code);
-      controller!.dispose();
-    }
-  }
   @override
   void initState() {
-
-    setState(() {
-      controller?.resumeCamera();
-    });
-    // TODO: implement initState
     super.initState();
   }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    readQr();
     return Scaffold(
       body: GestureDetector(
-        onTap: (){
+        onTap: () {
           controller?.resumeCamera();
-          setState(() {
-
-          });
         },
         child: QRView(
           key: qrKey,
@@ -76,10 +80,35 @@ class _ScanQrPageState extends State<ScanQrPage> {
       ),
     );
   }
+}
+class ScanResultDialog extends StatefulWidget {
+  final String qrData;
+  final Function onClose;
+
+  ScanResultDialog({required this.qrData, required this.onClose});
 
   @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
+  _ScanResultDialogState createState() => _ScanResultDialogState();
+}
+
+class _ScanResultDialogState extends State<ScanResultDialog> {
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text("QR Value"),
+      content: TextFormField(
+        initialValue: widget.qrData,
+        readOnly: true,
+      ),
+      actions: [
+        ElevatedButton(
+          onPressed: () {
+            widget.onClose();
+            Navigator.of(context).pop();
+          },
+          child: Text("Done"),
+        ),
+      ],
+    );
   }
 }

@@ -11,6 +11,11 @@ class AuthController extends GetxController {
   File ?file1;
 
 
+  var nameProvince = "".obs;
+  updateNameProv(val){
+    nameProvince.value=val;
+    update();
+  }
   var isVisible = true.obs;
   var isVisible1 = true.obs;
   var isVisible2 = true.obs;
@@ -114,6 +119,13 @@ class AuthController extends GetxController {
     isCheck2.value = val;
     update();
   }
+
+  RxBool isCheck3 = false.obs;
+  updateCheck3(val) {
+    isCheck3.value = val;
+    update();
+  }
+
 
 
   @override

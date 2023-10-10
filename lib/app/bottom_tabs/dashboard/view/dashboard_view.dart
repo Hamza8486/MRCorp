@@ -143,7 +143,7 @@ class _DashboardViewState extends State<DashboardView> {
                   onTap1: () {
 
                   },
-                  text: "00${homeController.profileId.value}"),
+                  text: "0${homeController.profileId.value}"),
               Expanded(
                   child: SingleChildScrollView(
                 child: Column(
@@ -254,6 +254,7 @@ class _DashboardViewState extends State<DashboardView> {
                             child: Obx(() {
                               return GestureDetector(
                                 onTap: () {
+
                                   homeController.updateSelectOption("3");
                                   homeController.updateSelectName("grocery");
                                   setState(() {
@@ -292,93 +293,93 @@ class _DashboardViewState extends State<DashboardView> {
                               );
                             }),
                           ),
-                          SizedBox(width: Get.width*0.03,),
-                          Expanded(
-                            child: Obx(() {
-                              return GestureDetector(
-                                onTap: () {
-                                  homeController.updateSelectOption("1");
-                                  homeController.updateSelectName("car");
-
-                                  setState(() {
-                                    _selectedItem = null;
-                                    homeController.slotAddList.clear();
-                                  });
-                                  homeController.getSlotData();
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      color:
-                                          homeController.selectOption.value ==
-                                                  "1"
-                                              ? AppColor.primaryColor
-                                              : Colors.transparent,
-                                      border: Border.all(color: AppColor.primaryColor),
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 9),
-                                    child: Center(
-                                      child: AppText(
-                                        title: "Get a Car",
-                                        size: AppSizes.size_14,
-                                        fontFamily: AppFont.medium,
-                                        fontWeight: FontWeight.w600,
-                                        color:
-                                            homeController.selectOption.value ==
-                                                    "1"
-                                                ? AppColor.whiteColor
-                                                : Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }),
-                          ),
-                          SizedBox(width: Get.width*0.03,),
-                          Expanded(
-                            child: Obx(() {
-                              return GestureDetector(
-                                onTap: () {
-                                  homeController.updateSelectOption("2");
-                                  homeController.updateSelectName("house");
-                                  homeController.getSlotData();
-                                  setState(() {
-                                    _selectedItem = null;
-                                    homeController.slotAddList.clear();
-                                  });
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      color:
-                                          homeController.selectOption.value ==
-                                                  "2"
-                                              ? AppColor.primaryColor
-                                              : Colors.transparent,
-                                      border: Border.all(color: AppColor.primaryColor),
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 9),
-                                    child: Center(
-                                      child: AppText(
-                                        title: "Get a House",
-                                        size: AppSizes.size_14,
-                                        fontFamily: AppFont.medium,
-                                        fontWeight: FontWeight.w600,
-                                        color:
-                                            homeController.selectOption.value ==
-                                                    "2"
-                                                ? AppColor.whiteColor
-                                                : Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }),
-                          ),
+                          // SizedBox(width: Get.width*0.03,),
+                          // Expanded(
+                          //   child: Obx(() {
+                          //     return GestureDetector(
+                          //       onTap: () {
+                          //         homeController.updateSelectOption("1");
+                          //         homeController.updateSelectName("car");
+                          //
+                          //         setState(() {
+                          //           _selectedItem = null;
+                          //           homeController.slotAddList.clear();
+                          //         });
+                          //         homeController.getSlotData();
+                          //       },
+                          //       child: Container(
+                          //         decoration: BoxDecoration(
+                          //             color:
+                          //                 homeController.selectOption.value ==
+                          //                         "1"
+                          //                     ? AppColor.primaryColor
+                          //                     : Colors.transparent,
+                          //             border: Border.all(color: AppColor.primaryColor),
+                          //             borderRadius: BorderRadius.circular(10)),
+                          //         child: Padding(
+                          //           padding: const EdgeInsets.symmetric(
+                          //               horizontal: 5, vertical: 9),
+                          //           child: Center(
+                          //             child: AppText(
+                          //               title: "Get a Car",
+                          //               size: AppSizes.size_14,
+                          //               fontFamily: AppFont.medium,
+                          //               fontWeight: FontWeight.w600,
+                          //               color:
+                          //                   homeController.selectOption.value ==
+                          //                           "1"
+                          //                       ? AppColor.whiteColor
+                          //                       : Colors.black,
+                          //             ),
+                          //           ),
+                          //         ),
+                          //       ),
+                          //     );
+                          //   }),
+                          // ),
+                          // SizedBox(width: Get.width*0.03,),
+                          // Expanded(
+                          //   child: Obx(() {
+                          //     return GestureDetector(
+                          //       onTap: () {
+                          //         homeController.updateSelectOption("2");
+                          //         homeController.updateSelectName("house");
+                          //         homeController.getSlotData();
+                          //         setState(() {
+                          //           _selectedItem = null;
+                          //           homeController.slotAddList.clear();
+                          //         });
+                          //       },
+                          //       child: Container(
+                          //         decoration: BoxDecoration(
+                          //             color:
+                          //                 homeController.selectOption.value ==
+                          //                         "2"
+                          //                     ? AppColor.primaryColor
+                          //                     : Colors.transparent,
+                          //             border: Border.all(color: AppColor.primaryColor),
+                          //             borderRadius: BorderRadius.circular(10)),
+                          //         child: Padding(
+                          //           padding: const EdgeInsets.symmetric(
+                          //               horizontal: 5, vertical: 9),
+                          //           child: Center(
+                          //             child: AppText(
+                          //               title: "Get a House",
+                          //               size: AppSizes.size_14,
+                          //               fontFamily: AppFont.medium,
+                          //               fontWeight: FontWeight.w600,
+                          //               color:
+                          //                   homeController.selectOption.value ==
+                          //                           "2"
+                          //                       ? AppColor.whiteColor
+                          //                       : Colors.black,
+                          //             ),
+                          //           ),
+                          //         ),
+                          //       ),
+                          //     );
+                          //   }),
+                          // ),
                         ],
                       ),
                     ),
@@ -512,7 +513,7 @@ class _DashboardViewState extends State<DashboardView> {
                                                     .toString(),
                                                 slot: value.toString(),
                                                 betId: homeController
-                                                    .selectOption.value
+                                                    .groceryId.value
                                                     .toString(),
                                                 total: ""),
                                           );
@@ -1061,17 +1062,109 @@ class _DashboardViewState extends State<DashboardView> {
                                         onTap: () {
                                           print(homeController.getSlot[index].id
                                               .toString());
-                                          scratchDialog(
-                                              context: context,
-                                              text: homeController
-                                                  .getSlot[index].coupon
-                                                  .toString(),
-                                              id: homeController
-                                                  .getSlot[index].id
-                                                  .toString(),
-                                              value:homeController
-                                                  .getSlot[index].isScratch=="true"?"true":null
-                                          );
+                                          Get.generalDialog(
+                                              pageBuilder: (context, __, ___) =>
+                                                  AlertDialog(
+                                                    shape: RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(40), // Customize the border radius
+                                                    ),
+
+
+                                                    content: SizedBox(
+                                                      height: Get.height*0.35,
+                                                      width: Get.width*0.55,
+                                                      child: Column(
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: [
+
+                                                          Center(
+                                                            child: AppText(
+                                                              title:"Scratch Coupon!",
+                                                              size: AppSizes
+                                                                  .size_15,
+                                                              fontFamily:
+                                                              AppFont.semi,
+                                                              fontWeight:
+                                                              FontWeight.w600,
+                                                              color: Colors.black,
+                                                            ),
+                                                          ),
+                                                          SizedBox(height: Get.height*0.03,),
+                                                          SizedBox(
+                                                            height: Get.height * 0.2,
+                                                            child: Center(
+                                                              child: Scratcher(
+                                                                brushSize: 50, // Adjust the brush size as needed
+                                                                threshold: 40, // Adjust the threshold as needed
+                                                                color: AppColor.primaryColor, // Initial scratch card color
+                                                                image: Image.asset('assets/images/scratch.png'), // Custom brush image
+                                                                onChange: (value) {
+                                                                  if (value >= 1.0 && !isScratched) {
+                                                                    setState(() {
+                                                                      isScratched = true; // Scratch threshold reached
+                                                                    });
+                                                                  }
+                                                                  print("Scratch progress: ${value * 100}%");
+                                                                },
+                                                                child: Container(
+                                                                    width: 300,
+                                                                    height: 200,
+                                                                    alignment: Alignment.center,
+                                                                    decoration: BoxDecoration(
+                                                                      color: AppColor.primaryColor, // Content revealed
+                                                                      borderRadius: BorderRadius.circular(10),
+                                                                      // boxShadow: isScratched
+                                                                      //     ? [] // No shadow when content is revealed
+                                                                      //     : [BoxShadow(blurRadius: 10, color: Colors.grey)], // Add a blurred effect
+                                                                    ),
+                                                                    child: Column(
+                                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                      children: [
+
+                                                                        AppText(
+                                                                          title:homeController.getSlot[index].coupon.toString(),
+                                                                          size: AppSizes
+                                                                              .size_16,
+                                                                          fontFamily:
+                                                                          AppFont.bold,
+                                                                          fontWeight:
+                                                                          FontWeight.w800,
+                                                                          color: Colors.white,
+                                                                        ),
+                                                                        SizedBox(height: Get.height*0.015,),
+                                                                        Image.asset("assets/images/sca.png",
+                                                                          height: Get.height*0.1,
+                                                                        )
+                                                                      ],
+                                                                    )
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          SizedBox(height: Get.height*0.03,),
+                                                          Padding(
+                                                            padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
+                                                            child: AppButton(
+                                                              buttonName: "Cancel",
+                                                              buttonColor: AppColor.primaryColor,
+                                                              textColor: AppColor.whiteColor,
+                                                              onTap: () {
+                                                                Get.back();
+                                                              },
+                                                              buttonHeight: Get.height * 0.055,
+                                                              buttonWidth: Get.width,
+                                                              fontFamily: AppFont.medium,
+                                                              textSize: AppSizes.size_16,
+                                                              buttonRadius: BorderRadius.circular(30),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+
+                                                  ));
+
                                         },
                                         child:
 
@@ -1177,134 +1270,57 @@ class _DashboardViewState extends State<DashboardView> {
               height: Get.height * 0.83,
               child: Column(
                 children: [
-                  SizedBox(
-                    height: Get.height * 0.28,
-                  ),
-                  SizedBox(
-                    height: Get.height * 0.01,
-                  ),
-                  StatefulBuilder(builder: (context, StateSetter setState) {
-                    return Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: Get.width * 0.04),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(50),
-                        child:
-                    value==null?
 
-                        Scratcher(
-                          accuracy: ScratchAccuracy.low,
-                          color: Colors.blueGrey,
-                          onChange: (value) {
+                  SizedBox(
+                    height: Get.height * 0.3,
+                    child: Center(
+                      child: Scratcher(
+                        brushSize: 50, // Adjust the brush size as needed
+                        threshold: 40, // Adjust the threshold as needed
+                        color: isScratched ? Colors.transparent : Colors.grey, // Initial scratch card color
+                        image: Image.asset('assets/images/scratch.png',
+                        height: Get.height*0.06,
+                        ), // Custom brush image
+                        onChange: (value) {
+                          if (value >= 1.0 && !isScratched) {
                             setState(() {
-                              if (value == 60.0) {
-                                ApiManger().claimScratch(
-                                    context: context, id: id.toString());
-                              } else {
-                                print(value.toString());
-                              }
+                              isScratched = true; // Scratch threshold reached
                             });
-                          },
-                          onScratchStart: () {
-                            print("Scratching has started");
-                          },
-                          onScratchUpdate: () {
-                            print("Scratching in progress");
-                          },
-                          onScratchEnd: () {
-                            print("Scratching has finished");
-                          },
-                          image: Image.asset(
-                            'assets/images/scan1.png',
+                          }
+                          print("Scratch progress: ${value * 100}%");
+                        },
+                        child: Container(
+                          width: 300,
+                          height: 200,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: isScratched ? Colors.blue : Colors.transparent, // Content revealed
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: isScratched
+                                ? [] // No shadow when content is revealed
+                                : [BoxShadow(blurRadius: 10, color: Colors.grey)], // Add a blurred effect
                           ),
-                          brushSize: 15,
-                          threshold: 60,
-                          onThreshold: () {
-                            setState(() {
-                              _opacity = 1;
-                            });
-                          },
-                          child: AnimatedOpacity(
-                            duration: Duration(microseconds: 100),
-                            opacity: _opacity,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10)),
-                              height: MediaQuery.of(context).size.height * 0.22,
-                              width: MediaQuery.of(context).size.width * 0.5,
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                    height: Get.height * 0.02,
-                                  ),
-                                  AppText(
-                                    title: "Congratulations!",
-                                    size: AppSizes.size_16,
-                                    fontFamily: AppFont.semi,
-                                    fontWeight: FontWeight.w600,
-                                    color: AppColor.primaryColor,
-                                  ),
-                                  SizedBox(
-                                    height: Get.height * 0.01,
-                                  ),
-                                  AppText(
-                                    title: text.toString(),
-                                    size: AppSizes.size_19,
-                                    fontFamily: AppFont.semi,
-                                    fontWeight: FontWeight.w600,
-                                    color: AppColor.blackColor,
-                                  ),
-                                  SizedBox(
-                                    height: Get.height * 0.01,
-                                  ),
-                                  Image.asset(
-                                    "assets/images/sca.png",
-                                    height: Get.height * 0.09,
-                                  )
-                                ],
-                              ),
+                          child: isScratched
+                              ? Text(
+                            'Value: Your Value Here', // Display your value
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          )
+                              : Text(
+                            'Scratch Me!',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
                             ),
                           ),
-                        ):Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10)),
-                      height: MediaQuery.of(context).size.height * 0.22,
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: Get.height * 0.03,
-                          ),
-                          AppText(
-                            title: "Congratulations!",
-                            size: AppSizes.size_16,
-                            fontFamily: AppFont.semi,
-                            fontWeight: FontWeight.w600,
-                            color: AppColor.primaryColor,
-                          ),
-                          SizedBox(
-                            height: Get.height * 0.015,
-                          ),
-                          AppText(
-                            title: text.toString(),
-                            size: AppSizes.size_17,
-                            fontFamily: AppFont.semi,
-                            fontWeight: FontWeight.w600,
-                            color: AppColor.blackColor,
-                          ),
-                          SizedBox(
-                            height: Get.height * 0.005,
-                          ),
-                          Image.asset(
-                            "assets/images/sca.png",
-                            height: Get.height * 0.1,
-                          )
-                        ],
+                        ),
                       ),
                     ),
-                      ),
-                    );
-                  }),
+                  ),
                   SizedBox(
                     height: Get.height * 0.13,
                   ),
@@ -1330,6 +1346,172 @@ class _DashboardViewState extends State<DashboardView> {
           );
         });
   }
+
+
+  // Future<void> scratchDialog({required BuildContext context, text, id,String?value}) {
+  //   return showDialog(
+  //       context: context,
+  //       builder: (BuildContext context) {
+  //         return AlertDialog(
+  //           shape: CircleBorder(),
+  //           title: SizedBox.shrink(),
+  //           content: Container(
+  //             height: Get.height * 0.83,
+  //             child: Column(
+  //               children: [
+  //                 SizedBox(
+  //                   height: Get.height * 0.28,
+  //                 ),
+  //                 SizedBox(
+  //                   height: Get.height * 0.01,
+  //                 ),
+  //                 StatefulBuilder(builder: (context, StateSetter setState) {
+  //                   return Padding(
+  //                     padding:
+  //                     EdgeInsets.symmetric(horizontal: Get.width * 0.04),
+  //                     child: ClipRRect(
+  //                       borderRadius: BorderRadius.circular(50),
+  //                       child:
+  //                       value==null?
+  //
+  //                       Scratcher(
+  //                         accuracy: ScratchAccuracy.low,
+  //                         color: Colors.blueGrey,
+  //                         onChange: (value) {
+  //                           setState(() {
+  //                             if (value == 60.0) {
+  //                               ApiManger().claimScratch(
+  //                                   context: context, id: id.toString());
+  //                             } else {
+  //                               print(value.toString());
+  //                             }
+  //                           });
+  //                         },
+  //                         onScratchStart: () {
+  //                           print("Scratching has started");
+  //                         },
+  //                         onScratchUpdate: () {
+  //                           print("Scratching in progress");
+  //                         },
+  //                         onScratchEnd: () {
+  //                           print("Scratching has finished");
+  //                         },
+  //                         image: Image.asset(
+  //                           'assets/images/scan1.png',
+  //                         ),
+  //                         brushSize: 15,
+  //                         threshold: 60,
+  //                         onThreshold: () {
+  //                           setState(() {
+  //                             _opacity = 1;
+  //                           });
+  //                         },
+  //                         child: AnimatedOpacity(
+  //                           duration: Duration(microseconds: 100),
+  //                           opacity: _opacity,
+  //                           child: Container(
+  //                             decoration: BoxDecoration(
+  //                                 borderRadius: BorderRadius.circular(10)),
+  //                             height: MediaQuery.of(context).size.height * 0.22,
+  //                             width: MediaQuery.of(context).size.width * 0.5,
+  //                             child: Column(
+  //                               children: [
+  //                                 SizedBox(
+  //                                   height: Get.height * 0.02,
+  //                                 ),
+  //                                 AppText(
+  //                                   title: "Congratulations!",
+  //                                   size: AppSizes.size_16,
+  //                                   fontFamily: AppFont.semi,
+  //                                   fontWeight: FontWeight.w600,
+  //                                   color: AppColor.primaryColor,
+  //                                 ),
+  //                                 SizedBox(
+  //                                   height: Get.height * 0.01,
+  //                                 ),
+  //                                 AppText(
+  //                                   title: text.toString(),
+  //                                   size: AppSizes.size_19,
+  //                                   fontFamily: AppFont.semi,
+  //                                   fontWeight: FontWeight.w600,
+  //                                   color: AppColor.blackColor,
+  //                                 ),
+  //                                 SizedBox(
+  //                                   height: Get.height * 0.01,
+  //                                 ),
+  //                                 Image.asset(
+  //                                   "assets/images/sca.png",
+  //                                   height: Get.height * 0.09,
+  //                                 )
+  //                               ],
+  //                             ),
+  //                           ),
+  //                         ),
+  //                       ):Container(
+  //                         decoration: BoxDecoration(
+  //                             borderRadius: BorderRadius.circular(10)),
+  //                         height: MediaQuery.of(context).size.height * 0.22,
+  //                         width: MediaQuery.of(context).size.width * 0.5,
+  //                         child: Column(
+  //                           children: [
+  //                             SizedBox(
+  //                               height: Get.height * 0.03,
+  //                             ),
+  //                             AppText(
+  //                               title: "Congratulations!",
+  //                               size: AppSizes.size_16,
+  //                               fontFamily: AppFont.semi,
+  //                               fontWeight: FontWeight.w600,
+  //                               color: AppColor.primaryColor,
+  //                             ),
+  //                             SizedBox(
+  //                               height: Get.height * 0.015,
+  //                             ),
+  //                             AppText(
+  //                               title: text.toString(),
+  //                               size: AppSizes.size_17,
+  //                               fontFamily: AppFont.semi,
+  //                               fontWeight: FontWeight.w600,
+  //                               color: AppColor.blackColor,
+  //                             ),
+  //                             SizedBox(
+  //                               height: Get.height * 0.005,
+  //                             ),
+  //                             Image.asset(
+  //                               "assets/images/sca.png",
+  //                               height: Get.height * 0.1,
+  //                             )
+  //                           ],
+  //                         ),
+  //                       ),
+  //                     ),
+  //                   );
+  //                 }),
+  //                 SizedBox(
+  //                   height: Get.height * 0.13,
+  //                 ),
+  //                 Padding(
+  //                   padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
+  //                   child: AppButton(
+  //                     buttonName: "Cancel",
+  //                     buttonColor: AppColor.primaryColor,
+  //                     textColor: AppColor.whiteColor,
+  //                     onTap: () {
+  //                       Get.back();
+  //                     },
+  //                     buttonHeight: Get.height * 0.055,
+  //                     buttonWidth: Get.width,
+  //                     fontFamily: AppFont.medium,
+  //                     textSize: AppSizes.size_16,
+  //                     buttonRadius: BorderRadius.circular(30),
+  //                   ),
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //         );
+  //       });
+  // }
 
   List<DropdownMenuItem<int>> countryDataList({var dataList}) {
     List<DropdownMenuItem<int>> outputList = [];

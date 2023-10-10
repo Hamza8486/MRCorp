@@ -48,14 +48,17 @@ Widget dashboardTopBar({onTap,onTap1,text,boo}){
                       padding: const EdgeInsets.symmetric(horizontal: 9.6,vertical: 7),
                       child: Obx(
                         () {
-                          return AppText(
-                            title: "USER\n$text",
-                            size:
-                            Get.put(HomeController()).profileId.value.isEmpty?9:
-                            9,
-                            fontFamily: AppFont.medium,
-                            fontWeight: FontWeight.w500,
-                            color: AppColor.boldBlackColor,
+                          return Center(
+                            child: AppText(
+                              title: "USER\n$text",
+                              size:
+                              Get.put(HomeController()).profileId.value.isEmpty?9:
+                              9,
+                              fontFamily: AppFont.medium,
+                              textAlign: TextAlign.center,
+                              fontWeight: FontWeight.w500,
+                              color: AppColor.boldBlackColor,
+                            ),
                           );
                         }
                       ),

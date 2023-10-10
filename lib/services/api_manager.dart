@@ -14,6 +14,7 @@ import 'package:mr_bet/app/auth/forget/view/otp.dart';
 import 'package:mr_bet/app/auth/login.dart';
 import 'package:mr_bet/app/auth/province_model.dart';
 import 'package:mr_bet/app/bottom_tabs/dashboard/model/account.dart';
+import 'package:mr_bet/app/bottom_tabs/dashboard/model/bet_model.dart';
 import 'package:mr_bet/app/bottom_tabs/dashboard/model/my_slots.dart';
 import 'package:mr_bet/app/bottom_tabs/dashboard/model/testmonials.dart';
 import 'package:mr_bet/app/bottom_tabs/dashboard/model/transaction_model.dart';
@@ -82,6 +83,31 @@ class ApiManger extends GetConnect {
       print("response.body");
       print(response.body);
       return GetBusinessStore.fromJson(jsonString);
+    } else {
+      log(response.statusCode.toString());
+
+      //show error message
+      return null;
+    }
+  }
+
+
+  static Future<GetBetModel?> getBetApi() async {
+    var response = await http.get(
+      Uri.parse(AppConstants.baseURL+AppConstants.getBet),
+
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json',
+        HttpHeaders.authorizationHeader: "Bearer ${Get.put(HomeController()).token.value}"
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var jsonString = jsonDecode(response.body);
+      print("response.body");
+      print(response.body);
+      return GetBetModel.fromJson(jsonString);
     } else {
       log(response.statusCode.toString());
 
@@ -183,6 +209,49 @@ class ApiManger extends GetConnect {
       }
     } on dio.DioError catch (e) {
       Get.put(AuthController()).updateLoader(false);
+      print(e.response?.data.toString());
+      flutterToast(msg: e.response?.data["error"].toString());
+    }
+  }
+
+
+
+  sendMessage({required BuildContext context,text,text1}) async {
+    try {
+      dio.FormData data = dio.FormData.fromMap({
+        'title':text1.toString(),
+        'message':text.toString(),
+        'email':Get.put(HomeController()).email.value,
+        'phone':Get.put(HomeController()).phone.value,
+
+      });
+      print("Data::::: ${data.fields}");
+      var response = await dio.Dio().post(
+          AppConstants.baseURL + AppConstants.contac,
+          data: data,
+          options: dio.Options(headers: {
+            HttpHeaders.contentTypeHeader: "application/json",
+            HttpHeaders.authorizationHeader: "Bearer ${Get.put(HomeController()).token.value}"
+
+
+          })
+      );
+      debugPrint(response.toString());
+      debugPrint(response.statusCode.toString());
+      if (response.statusCode == 200) {
+        //refferalResponse(context: context,token: )
+        Get.put(HomeController()).updateAddSlot(false);
+        Get.put(AuthController()).clear();
+        flutterToastSuccess(msg: "Request Submitted Successfully");
+        print(response.data);
+
+      }
+      else if(response.statusCode==202){
+        Get.put(HomeController()).updateAddSlot(false);
+        flutterToast(msg: response.data["error"].toString());
+      }
+    } on dio.DioError catch (e) {
+      Get.put(HomeController()).updateAddSlot(false);
       print(e.response?.data.toString());
       flutterToast(msg: e.response?.data["error"].toString());
     }
@@ -333,6 +402,77 @@ class ApiManger extends GetConnect {
   }
 
 
+  userStore({context}) async {
+    try {
+      late dio.MultipartFile x, lisenceFile;
+
+      try {
+        dio.FormData data = dio.FormData.fromMap({
+          'full_name': Get.put(HomeController()).name.value,
+          'store_name': Get.put(AuthController()).storeNameController.text,
+          'store_address': Get.put(AuthController()).addressController.text,
+          'mobile': Get.put(AuthController()).mobileController.text,
+          'lat': Get.put(AuthController()).lat.value,
+          'lng': Get.put(AuthController()).lng.value,
+          'store_license_id': "11222333",
+          'store_city': Get.put(AuthController()).provinceId.toString(),
+          Get.put(AuthController()).file==null?"":
+          'store_pic':
+          Get.put(AuthController()).file == null
+              ? "":
+          await dio.MultipartFile.fromFile(
+
+              Get.put(AuthController()).file!.path),
+          Get.put(AuthController()).file1==null?"":
+          'store_license_picture':
+          Get.put(AuthController()).file1 == null
+              ? "":
+          await dio.MultipartFile.fromFile(
+
+              Get.put(AuthController()).file1!.path),
+        });
+        print("Data::::: ${data.fields}");
+        print("Data::::: ${data.fields}");
+        var response = await dio.Dio().post(
+            AppConstants.baseURL + AppConstants.add_User_Store,
+            data: data,
+            options: dio.Options(headers: {
+              HttpHeaders.contentTypeHeader: "application/json",
+
+              HttpHeaders.authorizationHeader: "Bearer ${Get.put(HomeController()).token.value}"
+
+
+            })
+        );
+        if (response.statusCode == 200) {
+
+          Get.put(HomeController()).getStoreData();
+          Get.put(AuthController()).updateLoader(false);
+          Get.put(AuthController()).clear();
+          flutterToastSuccess1(msg: "Store Created Successfully");
+          Get.back();
+          print(response.data);
+
+        }
+        else if(response.statusCode==202){
+          Get.put(AuthController()).updateLoader(false);
+          flutterToast(msg: response.data["error"].toString());
+
+        }
+      } on dio.DioError catch (e) {
+        Get.put(AuthController()).updateLoader(false);
+        flutterToast(msg: e.response?.data["error"].toString());
+        // log("e.response");
+
+
+      }
+    } on dio.DioError catch (e) {
+      Get.put(AuthController()).updateLoader(false);
+      flutterToast(msg: e.response?.data["error"].toString());
+    }
+  }
+
+
 
 
 
@@ -447,6 +587,7 @@ class ApiManger extends GetConnect {
         print(response.toString());
         if (response.statusCode == 200 || response.statusCode == 201) {
 
+          Get.put(HomeController()).getAllBetData();
           Get.put(HomeController()).getSlotData1(id: "",filter: "",type: "");
           Get.put(HomeController()).getSlotData(id: "",filter: "");
           Get.put(HomeController()).getWalletData();

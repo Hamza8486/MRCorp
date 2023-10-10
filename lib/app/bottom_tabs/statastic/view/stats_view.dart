@@ -152,11 +152,11 @@ class _StatsViewState extends State<StatsView> {
                               child: Obx(() {
                                 return dropDownAppAdd(
                                   hint: "Select type",
-                                  width: Get.width * 0.36,
+                                  width: Get.width * 0.3,
                                   height: Get.height * 0.3,
                                   items: [
-                                    "Car",
-                                    "House",
+                                    // "Car",
+                                    // "House",
                                     "Grocery",
                                   ],
                                   color: AppColor.primaryColor,
@@ -390,17 +390,108 @@ class _StatsViewState extends State<StatsView> {
                                 onTap: () {
                                   print(homeController.getSlot1[index].id
                                       .toString());
-                                  scratchDialog(
-                                      context: context,
-                                      text: homeController
-                                          .getSlot1[index].coupon
-                                          .toString(),
-                                      id: homeController
-                                          .getSlot1[index].id
-                                          .toString(),
-                                      value:homeController
-                                          .getSlot1[index].isScratch=="true"?"true":null
-                                  );
+                                  Get.generalDialog(
+                                      pageBuilder: (context, __, ___) =>
+                                          AlertDialog(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(40), // Customize the border radius
+                                            ),
+
+
+                                            content: SizedBox(
+                                              height: Get.height*0.35,
+                                              width: Get.width*0.55,
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+
+                                                  Center(
+                                                    child: AppText(
+                                                      title:"Scratch Coupon!",
+                                                      size: AppSizes
+                                                          .size_15,
+                                                      fontFamily:
+                                                      AppFont.semi,
+                                                      fontWeight:
+                                                      FontWeight.w600,
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: Get.height*0.03,),
+                                                  SizedBox(
+                                                    height: Get.height * 0.2,
+                                                    child: Center(
+                                                      child: Scratcher(
+                                                        brushSize: 50, // Adjust the brush size as needed
+                                                        threshold: 40, // Adjust the threshold as needed
+                                                        color: AppColor.primaryColor, // Initial scratch card color
+                                                        image: Image.asset('assets/images/scratch.png'), // Custom brush image
+                                                        onChange: (value) {
+                                                          if (value >= 1.0) {
+                                                            setState(() {
+
+                                                            });
+                                                          }
+                                                          print("Scratch progress: ${value * 100}%");
+                                                        },
+                                                        child: Container(
+                                                            width: 300,
+                                                            height: 200,
+                                                            alignment: Alignment.center,
+                                                            decoration: BoxDecoration(
+                                                              color: AppColor.primaryColor, // Content revealed
+                                                              borderRadius: BorderRadius.circular(10),
+                                                              // boxShadow: isScratched
+                                                              //     ? [] // No shadow when content is revealed
+                                                              //     : [BoxShadow(blurRadius: 10, color: Colors.grey)], // Add a blurred effect
+                                                            ),
+                                                            child: Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                              children: [
+
+                                                                AppText(
+                                                                  title:homeController.getSlot1[index].coupon.toString(),
+                                                                  size: AppSizes
+                                                                      .size_16,
+                                                                  fontFamily:
+                                                                  AppFont.bold,
+                                                                  fontWeight:
+                                                                  FontWeight.w800,
+                                                                  color: Colors.white,
+                                                                ),
+                                                                SizedBox(height: Get.height*0.015,),
+                                                                Image.asset("assets/images/sca.png",
+                                                                  height: Get.height*0.1,
+                                                                )
+                                                              ],
+                                                            )
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: Get.height*0.03,),
+                                                  Padding(
+                                                    padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
+                                                    child: AppButton(
+                                                      buttonName: "Cancel",
+                                                      buttonColor: AppColor.primaryColor,
+                                                      textColor: AppColor.whiteColor,
+                                                      onTap: () {
+                                                        Get.back();
+                                                      },
+                                                      buttonHeight: Get.height * 0.055,
+                                                      buttonWidth: Get.width,
+                                                      fontFamily: AppFont.medium,
+                                                      textSize: AppSizes.size_16,
+                                                      buttonRadius: BorderRadius.circular(30),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+
+                                          ));
                                 },
                                 child:
 

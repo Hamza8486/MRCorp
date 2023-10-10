@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:mr_bet/app/auth/component.dart';
 import 'package:mr_bet/app/auth/controller.dart';
@@ -24,7 +25,7 @@ class _RegisterState extends State<Register> {
   final authController = Get.put(AuthController());
 
   final formKey = GlobalKey<FormState>();
-
+  String? provinceName;
   @override
   Widget build(BuildContext context) {
     final isKeyBoard = MediaQuery.of(context).viewInsets.bottom != 0;
@@ -150,33 +151,107 @@ class _RegisterState extends State<Register> {
                                   SizedBox(
                                     height: Get.height * 0.01,
                                   ),
-                                  Obx(
-                                          () {
-                                        return SizedBox(
-                                          height: Get.height*0.055,
-                                          child: dropDownButtons(
-                                            color: AppColor.borderColorField,
-                                              color1: AppColor.borderColorField,
+                                  SizedBox(
+                                    height: Get.put(AuthController()).provinceList.isEmpty
+                                        ? Get.height * 0.055
+                                        : Get.height * 0.055,
+                                    child: PopupMenuButton(
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0),
+                                        ),
+                                      ),
+                                      offset: const Offset(0, 55),
+                                      onSelected: (value) async {
+                                        setState(() {
+                                          for (int i = 0; i < Get.put(AuthController()).provinceList.length; i++) {
+                                            if (value.toString() ==
+                                                Get.put(AuthController()).provinceList[i].id.toString()) {
+                                              Get.put(AuthController())
+                                                  .updateNameProv(Get.put(AuthController()).provinceList[i].name);
+                                            }
+                                          }
 
-                                              contentPadding: EdgeInsets.zero,
-                                              color2:  AppColor.greyColors,
-
-                                              hinText: "Select Province",
-                                              value: authController.provinceId,
-                                              onChanged: (value) async {
-                                              setState(() {
-                                                authController.provinceId=value;
-                                              });
+                                          authController.provinceId = value;
 
 
+                                        });
+                                      },
+                                      constraints: BoxConstraints(
+                                          minWidth: Get.height * 0.21,
+                                          maxWidth: Get.height * 0.21,
+                                          maxHeight: Get.height*0.25),
+                                      itemBuilder: (BuildContext bc) {
+                                        return List.generate(
+                                            Get.put(AuthController()).provinceList.length, (index ) {
+                                          return  PopupMenuItem(
+                                              padding:
+                                              const EdgeInsets.symmetric(horizontal: 12),
+                                              value:  Get.put(AuthController()).provinceList[index]
+                                                  .id
+                                                  .toString(),
+                                              child: AppText(
+                                                title: Get.put(AuthController()).provinceList[index]
+                                                    .name
+                                                    .toString(),
 
-                                              },
-                                              items: countryDataList(
-                                                  dataList: authController
-                                                      .provinceList)),
-                                        );
-                                      }
-                                  ),
+                                                size: AppSizes.size_13,
+                                                fontWeight: FontWeight.w600,
+                                                fontFamily: AppFont.medium,
+                                                color: AppColor.blackColor,
+                                              ));
+                                        });
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: AppColor.blackColor.withOpacity(0.4),
+                                            ),
+                                            borderRadius: BorderRadius.circular(10)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Obx(() {
+                                                return SizedBox(
+                                                  width: Get.width*0.22,
+                                                  child: AppText(
+                                                    overFlow: TextOverflow.ellipsis,
+                                                    maxLines: 1,
+                                                    title:Get.put(AuthController())
+                                                        .nameProvince
+                                                        .value
+                                                        .isEmpty
+                                                        ?"Province":Get.put(AuthController())
+                                                        .nameProvince
+                                                        .value,
+                                                    color:
+                                                    Get.put(AuthController())
+                                                        .nameProvince
+                                                        .value
+                                                        .isEmpty?
+                                                    AppColor.greyColors:
+                                                    AppColor.blackColor,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontFamily: AppFont.medium,
+                                                    size: Get.height * 0.016,
+                                                  ),
+                                                );
+                                              }),
+                                              SizedBox(
+                                                width: Get.width * 0.02,
+                                              ),
+                                              SvgPicture.asset(
+                                                "assets/icons/downs.svg",
+                                                height: Get.height * 0.01,
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )
 
                                 ],
                               ),
@@ -192,7 +267,8 @@ class _RegisterState extends State<Register> {
                         ),
                         Row(
                           children: [
-                            Expanded(child: Obx(
+
+                            Obx(
                               () {
                                 return chooseOptionsAll(color:
 
@@ -210,12 +286,11 @@ class _RegisterState extends State<Register> {
                                     authController.updateCheck(false);
                                   }
                                 },
-                                text: "Have own car"
+                                text: "Have car"
                                 );
                               }
                             ),
-                            ),
-                            Expanded(child:
+                            SizedBox(width: Get.width*0.05,),
                             Obx(
                                     () {
                                   return chooseOptionsAll(color:
@@ -234,7 +309,35 @@ class _RegisterState extends State<Register> {
                                           authController.updateCheck2(false);
                                         }
                                       },
-                                      text: "Have own house"
+                                      text: "Have house"
+                                  );
+                                }
+                            ),
+                            SizedBox(width: Get.width*0.05,),
+                            Expanded(child:
+                            Obx(
+                                    () {
+                                  return chooseOptionsAll(color:
+
+                                  authController.isCheck3.value==false?Colors.transparent:
+                                  AppColor.primaryColor,color1: authController.isCheck3.value==false?Colors.black:
+                                  AppColor.primaryColor,
+
+                                      color2:
+                                      authController.isCheck3.value==false?
+
+                                      Colors.transparent:AppColor.whiteColor,onTap: (){
+                                        if (authController.isCheck3.value == false) {
+                                          authController.updateCheck2(false);
+                                          authController.updateCheck(false);
+                                          authController.updateCheck3(true);
+                                        } else {
+                                          authController.updateCheck2(false);
+                                          authController.updateCheck(false);
+                                          authController.updateCheck3(false);
+                                        }
+                                      },
+                                      text: "None"
                                   );
                                 }
                             ))
@@ -318,6 +421,7 @@ class _RegisterState extends State<Register> {
                       buttonColor: AppColor.primaryColor,
                       textColor: AppColor.whiteColor,
                       onTap: () {
+                        print(authController.provinceId.toString());
                         if(validateRegister(context)){
                           authController.updateLoader(true);
                           ApiManger().registerResponse(context: context);

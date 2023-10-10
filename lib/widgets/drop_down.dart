@@ -110,7 +110,7 @@ class SortedByDropDown extends StatelessWidget {
               child: Row(
                 children: [
                   child1??
-                SvgPicture.asset("assets/images/slot.svg",height: Get.height*0.018,
+                SvgPicture.asset("assets/images/slot.svg",height: Get.height*0.01,
                                     color: AppColor.boldBlackColor,
 
                                   ),

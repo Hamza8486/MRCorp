@@ -13,6 +13,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:mr_bet/app/home/controller/home_controller.dart';
 import 'package:mr_bet/app/splash/splash_view.dart';
 import 'package:mr_bet/app/vendor_home/vendor_home.dart';
+import 'package:mr_bet/scratch.dart';
 import 'package:mr_bet/services/fcm/local_notification.dart';
 import 'package:mr_bet/util/constant.dart';
 import 'package:mr_bet/widgets/timer.dart';
@@ -190,6 +191,7 @@ class _Application extends State<Application> {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       debugPrint("Received...");
       Get.put(HomeController()).getProfileData();
+      Get.put(HomeController()).getWalletData();
 
 
 
